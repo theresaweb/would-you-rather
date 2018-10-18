@@ -5,7 +5,6 @@
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-icons": "^3.1.0",
     "react-redux": "^5.0.7",
     "react-redux-loading": "^1.0.1",
     "react-router-dom": "^4.3.1",

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Homepage from './Homepage'
 import LoadingBar from 'react-redux-loading'
+import NewPoll from './NewPoll'
 
 class App extends Component {
   componentDidMount() {
@@ -14,7 +15,8 @@ class App extends Component {
         <LoadingBar />
         {this.props.loading === true
           ? null
-          : <Homepage />}
+          : <NewPoll />}
+
       </div>
     )
   }
