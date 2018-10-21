@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { handleAddPoll } from '../actions/polls'
+import { Redirect } from 'react-router-dom'
 
 class NewPoll extends Component {
   state = {
     choicesTxt: [],
+    toHome: false,
   }
   handleChange = (e, index) => {
     const choicesTxt = this.state.choicesTxt.slice()
@@ -14,15 +18,18 @@ class NewPoll extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
      const { choicesTxt } = this.state
-     // todo: Add Tweet to Store
-     console.log('New Poll: ', choicesTxt)
+     const { dispatch, id } = this.props
+     dispatch(handleAddPoll(choicesTxt))
      this.setState(() => ({
-      choicesTxt: []
+      choicesTxt: [],
+      toHome: id ? false : true,
     }))
   }
   render() {
-    const { choicesTxt } = this.state
-     {/* todo: Redirect to / if submitted */}
+    const { choicesTxt, toHome } = this.state
+    if (toHome === true) {
+      return <Redirect to='/' />
+    }
      return (
       <div>
         <h3 className='center'>Create a Poll</h3>
@@ -44,7 +51,7 @@ class NewPoll extends Component {
           <button
             className='btn'
             type='submit'
-            disabled={choicesTxt[0] === '' || choicesTxt[1] === ''}>
+            disabled={choicesTxt.length < 2}>
               Submit
           </button>
         </form>
@@ -52,4 +59,4 @@ class NewPoll extends Component {
     )
   }
 }
- export default NewPoll
+export default connect()(NewPoll)

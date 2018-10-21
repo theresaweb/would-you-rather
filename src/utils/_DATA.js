@@ -144,21 +144,23 @@ function generateUID () {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
 
-function formatPoll ({ choicesTxt, choice1=null, choice2=null }) {
+function formatPoll ({ choicesTxt, author }) {
   return {
+    author,
     id: generateUID(),
-    choicesTxt: [],
-    choice1,
-    choice2,
+    choicesTxt,
+    timestamp: Date.now(),
+    choice1: [],
+    choice2: [],
   }
 }
 
-export function _savePoll ({ author, choicesTxt, choice1=null, choice2=null }) {
+export function _savePoll ({ choicesTxt, author }) {
+  console.log("choicestxt",choicesTxt)
   return new Promise((res, rej) => {
     const formattedPoll = formatPoll({
       choicesTxt,
-      choice1,
-      choice2,
+      author
     })
 
     setTimeout(() => {
