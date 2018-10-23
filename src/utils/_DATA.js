@@ -145,11 +145,12 @@ function generateUID () {
 }
 
 function formatPoll ({ choicesTxt, author }) {
+  console.log("formatPoll in _DATA.js")
   return {
-    author,
     id: generateUID(),
-    choicesTxt,
     timestamp: Date.now(),
+    author,
+    choicesTxt,
     choice1: [],
     choice2: [],
   }
