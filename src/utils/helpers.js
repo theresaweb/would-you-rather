@@ -15,3 +15,13 @@ export function formatPoll (poll, authedUser) {
     choice2,
   }
 }
+
+export function formatUser (user) {
+  const { id, name, avatarURL, polls } = user
+  return {
+    id,
+    name,
+    avatarURL,
+    polls,
+  }
+}

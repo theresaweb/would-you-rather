@@ -13,7 +13,9 @@
   padding: 20px;
   width: 50%;
 }
-/* The switch - the box around the slider */
+.answeredToggle {
+  color: darkcyan;
+}
 .switch {
   position: relative;
   display: inline-block;
