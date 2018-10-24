@@ -2,29 +2,35 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Theresa Newman / Would You Rather app / React / Redux / Udacity React Nanodegree project #2
 
+To run
+1. clone from https://github.com/theresaweb/would-you-rather
+2. cd to local folder and run `npm install`
+3. open browser to localhost:3000
+
+
 A Guide for the Planning Stages of Your Project
 * Identify What Each View Should Look Like
-** Login view
-*** user can upload avatar
-** Navigation
-*** user name displayed
-*** to Homepage
-*** to leaderboard
-*** to new poll page
-** Dashboard/Homepage
-*** answered and unanswered toggle
-*** poll links to poll detail page if logged in otherwise links to login page
-** Poll detail page
-*** url questions/:question_id
-*** if poll has been answered, results are shown and user's selection is clearly shown
-*** if poll is unanswered, user can answer and then results are shown and user's selection is clearly shown
-** New Poll page
-*** url of page is /add
-*** user enters 2 choices
-*** upon submission page is redirected to Homepage
-** Leaderboard
-*** url is /leaderboard
-*** List of users by most answered + most asked
+  * Login view
+    * user can upload avatar
+  * Navigation
+    * user name displayed
+    * to Homepage
+    * to leaderboard
+    * to new poll page
+  * Dashboard/Homepage
+    * answered and unanswered toggle
+    * poll links to poll detail page if logged in otherwise links to login page
+  * Poll detail page
+    * url questions/:question_id
+    * if poll has been answered, results are shown and user's selection is clearly shown
+    * if poll is unanswered, user can answer and then results are shown and user's selection is clearly shown
+  * New Poll page
+    * url of page is /add
+    * user enters 2 choices
+    * upon submission page is redirected to Homepage
+  * Leaderboard
+    * url is /leaderboard
+    * List of users by most answered + most asked
 
 
 * Break Each View Into a Hierarchy of Components
