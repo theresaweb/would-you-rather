@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Poll from './Poll'
-import NewPoll from './NewPoll'
+//import NewPoll from './NewPoll'
 
 class PollPage extends Component {
   render() {

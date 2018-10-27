@@ -26,37 +26,52 @@ class NewPoll extends Component {
     }))
   }
   render() {
+    const { authedUser } = this.props
     const { choicesTxt, toHome } = this.state
-    if (toHome === true) {
-      return <Redirect to='/' />
-    }
+    if (authedUser === '') {
      return (
-      <div>
-        <h3 className='center'>Create a Poll</h3>
-        <form className='new-poll' onSubmit={this.handleSubmit}>
-          <input
-            className="choiceTxt"
-            value={choicesTxt[0]}
-            onChange={(e) => this.handleChange(e, 0)}
-            maxLength={280}
-            placeholder="Choice 1"
-          />
-          <input
-            className="choiceTxt"
-            value={choicesTxt[1]}
-            onChange={(e) => this.handleChange(e, 1)}
-            maxLength={280}
-            placeholder="Choice 2"
-          />
-          <button
-            className='btn'
-            type='submit'
-            disabled={choicesTxt.length < 2}>
-              Submit
-          </button>
-        </form>
-      </div>
-    )
+     <h1 className="pleaseLogin">
+       Please <a href="/login">login</a>
+     </h1>
+    )} else {
+      if (toHome === true) {
+        return <Redirect to='/' />
+      }
+       return (
+        <div>
+          <h3 className='center'>Create a Poll</h3>
+          <form className='new-poll' onSubmit={this.handleSubmit}>
+            <input
+              className="choiceTxt"
+              value={choicesTxt[0]}
+              onChange={(e) => this.handleChange(e, 0)}
+              maxLength={280}
+              placeholder="Choice 1"
+            />
+            <input
+              className="choiceTxt"
+              value={choicesTxt[1]}
+              onChange={(e) => this.handleChange(e, 1)}
+              maxLength={280}
+              placeholder="Choice 2"
+            />
+            <button
+              className='btn'
+              type='submit'
+              disabled={choicesTxt.length < 2}>
+                Submit
+            </button>
+          </form>
+        </div>
+      )
+    }
   }
 }
-export default connect()(NewPoll)
+function mapStateToProps ({ polls, users, authedUser }) {
+ return {
+   polls,
+   users,
+   authedUser
+ }
+}
+export default connect(mapStateToProps)(NewPoll)

@@ -7,7 +7,7 @@ import { RECEIVE_POLLS, ADD_POLL } from '../actions/polls'
         ...action.polls
       }
     case ADD_POLL :
-      const { poll } = action
+      //const { poll } = action
       return {
         ...state,
         [action.poll.id]: action.poll,

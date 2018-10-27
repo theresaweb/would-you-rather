@@ -5,6 +5,7 @@ import './Nav.css'
 
 class Nav extends Component {
   render() {
+    const { authedUser } = this.props
     return (
       <nav className='nav'>
         <ul>
@@ -19,14 +20,35 @@ class Nav extends Component {
             </NavLink>
           </li>
         </ul>
-        <span className="naveUsername">Hi {this.props.authedUser}</span>
+        <ul className="loginNav">
+            {authedUser ?
+              <li>
+                <span className="navUsername">Hi {authedUser}</span>
+              </li>
+              :
+              <li>
+                <NavLink to='/login' activeClassName='active'>
+                  Login
+                </NavLink>
+              </li>
+            }
+            {authedUser &&
+              <li><span>&nbsp;|&nbsp;</span></li>
+            }
+            {authedUser &&
+              <li>
+                <NavLink to='/logout'>Logout</NavLink>
+              </li>
+            }
+        </ul>
+
       </nav>
     )
   }
 }
-function mapStateToProps ({ authedUser }) {
+function mapStateToProps ({authedUser, users, polls}) {
  return {
    authedUser
  }
 }
-export default connect(mapStateToProps)(Nav)
+export default connect(mapStateToProps, null, null, { pure: false })(Nav)

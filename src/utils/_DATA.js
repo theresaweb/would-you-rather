@@ -156,19 +156,16 @@ function formatPoll ({ choicesTxt, author }) {
 }
 
 export function _savePoll ({ choicesTxt, author }) {
-  console.log("choicestxt",choicesTxt)
   return new Promise((res, rej) => {
     const formattedPoll = formatPoll({
       choicesTxt,
       author
     })
-
     setTimeout(() => {
       polls = {
         ...polls,
         [formattedPoll.id]: formattedPoll,
       }
-
       users = {
         ...users,
         [author]: {
@@ -176,7 +173,6 @@ export function _savePoll ({ choicesTxt, author }) {
           polls: users[author].polls.concat([formattedPoll.id])
         }
       }
-
       res(formattedPoll)
     }, 1000)
   })

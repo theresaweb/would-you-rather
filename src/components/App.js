@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Login from './Login'
+import Logout from './Logout'
 import Homepage from './Homepage'
 import LoadingBar from 'react-redux-loading'
 import NewPoll from './NewPoll'
@@ -26,6 +27,7 @@ class App extends Component {
               : <div>
                   <Route path='/' exact component={Homepage} />
                   <Route path='/login' component={Login} />
+                  <Route path='/logout' component={Logout} />
                   <Route path='/poll/:id' component={PollPage} />
                   <Route path='/new' component={NewPoll} />
                 </div>}

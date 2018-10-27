@@ -2,7 +2,7 @@ import {  savePoll } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 export const ADD_POLL = 'ADD_POLL'
- function addPoll (poll) {
+function addPoll (poll) {
   return {
     type: ADD_POLL,
     poll,
