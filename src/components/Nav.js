@@ -19,6 +19,11 @@ class Nav extends Component {
               New Poll
             </NavLink>
           </li>
+          <li>
+            <NavLink to='/leaderboard' activeClassName='active'>
+              Leaderboard
+            </NavLink>
+          </li>
         </ul>
         <ul className="loginNav">
             {authedUser ?
