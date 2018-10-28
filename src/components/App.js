@@ -9,6 +9,7 @@ import LoadingBar from 'react-redux-loading'
 import NewPoll from './NewPoll'
 import PollPage from './PollPage'
 import Leaderboard from './Leaderboard'
+import NotFound from './NotFound'
 import Nav from './Nav'
 import './App.css'
 
@@ -32,6 +33,7 @@ class App extends Component {
                   <Route path='/poll/:id' component={PollPage} />
                   <Route path='/new' component={NewPoll} />
                   <Route path='/leaderboard' component={Leaderboard} />
+                  <Route path='/notfound' component={NotFound} />
                 </div>}
           </div>
         </Fragment>
