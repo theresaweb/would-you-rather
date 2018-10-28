@@ -4,7 +4,7 @@ export function formatDate (timestamp) {
   return d.toLocaleDateString() + ' at ' + time.substr(0, 5) + time.slice(-2)
 }
 
-export function formatPoll (poll, authedUser) {
+export function formatPoll (poll) {
   const { id, author, timestamp, choicesTxt, choice1, choice2 } = poll
   return {
     id,

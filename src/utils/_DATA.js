@@ -3,19 +3,16 @@ let users = {
     id: "dog_lover",
     name: "Dog Lover",
     avatarURL: "https://loremflickr.com/240/240/dog?lock=1",
-    polls: ['8xf0y6ziyjabvozdd253nd', 'hbsc73kzqi75rg7v1e0i6a', '2mb6re13q842wu8n106bhk'],
   },
   alacazam: {
     id: "alacazam",
     name: "Alexandria Kazam",
     avatarURL: "https://loremflickr.com/240/240/dog?lock=2",
-    polls: ['8xf0y6ziyjabvozdd253nd','5c9qojr2d1738zlx09afby', 'f4xzgapq7mu783k9t02ghx', 'nnvkjqoevs8t02lzcc0ky'],
   },
   shoes_hats: {
     id: "shoes_hats",
     name: "Mary Smith",
     avatarURL: "https://loremflickr.com/240/240/dog?lock=3",
-    polls: ['8xf0y6ziyjabvozdd253nd','5w6k1n34dkp1x29cuzn2zn', 'czpa59mg577x1oo45cup0d', 'omdbjl68fxact38hk7ypy6', '3km0v4hf1ps92ajf4z2ytg'],
   }
 }
 
@@ -170,7 +167,6 @@ export function _savePoll ({ choicesTxt, author }) {
         ...users,
         [author]: {
           ...users[author],
-          polls: users[author].polls.concat([formattedPoll.id])
         }
       }
       res(formattedPoll)

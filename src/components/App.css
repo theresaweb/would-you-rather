@@ -4,3 +4,7 @@ html {
 *, ::before, ::after {
   box-sizing: inherit;
 }
+h1 {
+  color: darkcyan;
+  text-align: center;
+}

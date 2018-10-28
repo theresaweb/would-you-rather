@@ -1,50 +1,62 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Poll from './Poll'
+import './PollPage.css'
 //import NewPoll from './NewPoll'
 
 class PollPage extends Component {
   render() {
-    const { id, choice1, choice2 } = this.props
-    return (
-      <div>
-        {/*On this page I want to check if the polls been taken and give the option
-          also want to show the resutls so far??
-          */}
-        <Poll id={id} />
-        <hr />
-        {choice1.length !== 0 && <h3 className='center'>Replied choice1</h3>}
-        <ul>
-          {choice1.map((chooser) => (
-            <li key={chooser}>
-              show user who has taken poll here?
-              {/*<User id={chooser}/>*/}
-            </li>
-          ))}
-        </ul>
-        {choice2.length !== 0 && <h3 className='center'>Replied choice2</h3>}
-        <ul>
-          {choice2.map((chooser) => (
-            <li key={chooser}>
-              show user who has taken poll here?
-              {/*<User id={chooser}/>*/}
-            </li>
-          ))}
-        </ul>
-      </div>
-    )
+    const { id, poll, authedUser } = this.props
+    const totalAnswers = poll.choice1.length + poll.choice2.length
+    const percChoice1 = totalAnswers > 0 ? parseInt((poll.choice1.length / totalAnswers) * 100, 10) : 0
+    const userChosen = findAuthedUserChoice(authedUser)
+    function findAuthedUserChoice () {
+      if(poll.choice1.includes(authedUser)) {
+        return poll.choicesTxt[0]
+      } else if (poll.choice2.includes(authedUser)) {
+        return poll.choicesTxt[1]
+      } else {
+        return false
+      }
+    }
+    if (authedUser === '') {
+     return (
+       <h1 className="pleaseLogin">
+         Please <a href="/login">login</a>
+       </h1>
+     )} else {
+      return (
+        <div className='pollPage'>
+          <h1>WOULD YOU RATHER???</h1>
+          <Poll id={id} />
+            <div className='pollDetails'>
+              <h2 className='pollTotals'>Total Votes: {totalAnswers}</h2>
+              {userChosen &&
+                <h2 className='pollChosen'>You chose {userChosen}</h2>
+              }
+              <div className="pollResults">
+                <h4>{poll.choicesTxt[0]} - {percChoice1}%</h4>
+                <h4 className='pollChoice2'>{poll.choicesTxt[1]} - {100 - percChoice1}%</h4>
+                <progress className="pollResults-1" max="100" value={percChoice1}>
+                </progress>
+              </div>
+            </div>
+        </div>
+      )
+    }
   }
 }
  function mapStateToProps ({ authedUser, polls, users }, props) {
   const { id } = props.match.params
-   return {
+  const thePolls = [];
+  Object.entries(polls).forEach(([key, value]) => {
+    thePolls.push(value)
+  });
+  const poll = thePolls.filter((p) => p.id === id)[0]
+  return {
+    authedUser,
     id,
-    choice1: !polls[id]
-      ? []
-      : polls[id].choice1,
-    choice2: !polls[id]
-      ? []
-      : polls[id].choice2
+    poll: poll
   }
 }
  export default connect(mapStateToProps)(PollPage)

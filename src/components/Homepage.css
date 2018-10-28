@@ -3,15 +3,14 @@
   flex-direction: column;
   align-items: center;
 }
-.homepage h1 {
-  color: darkcyan;
-  text-align: center;
-}
 .homepage-list {
   list-style: none;
   margin: 0;
   padding: 20px;
-  width: 50%;
+  width: 100%;
+}
+.homepage-list .poll {
+  cursor: pointer;
 }
 .answeredToggle {
   color: darkcyan;

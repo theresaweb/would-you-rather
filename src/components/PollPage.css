@@ -1,0 +1,62 @@
+.pollPage .pollInfo {
+  border-radius: 20px 20px 0 0;
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+.pollDetails {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 0 auto;
+  border: 1px solid #CAD0D2;
+  border-top: 0;
+  border-radius: 0 0 20px 20px;
+  padding: 20px 0;
+}
+progress, progress[role] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background-size: auto;
+  height: 100px;
+  width: 100%;
+}
+.pollResults {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+}
+.pollResults  h4  {
+  color: #fff;
+  left: 1em;
+  line-height: 1;
+  position: absolute;
+  top: 1em;
+  font-size: 2em;
+  margin: 0;
+}
+.pollResults .pollChoice2 {
+  right: 1em;
+  left: auto;
+}
+.pollResults::-webkit-progress-value {
+  -webkit-animation: bar-fill 2s;
+  width: 0px;
+}
+.pollResults-1::-webkit-progress-value {
+  background: Gold;
+}
+.pollResults-1[value]::-webkit-progress-bar {
+  background-color: DarkMagenta;
+}
+.pollResults-1[value]::-moz-progress-bar {
+  background: DarkMagenta;
+}
+.pollChosen {
+  border:1px dashed darkcyan;
+  width:80%;
+  margin: 10px auto;
+  padding: 10px 0;
+}
