@@ -41,7 +41,6 @@ class TakePoll extends Component {
               </div>
               <button
                 className='btn'
-                type='submit'
                 disabled={this.state.selected}>
                   Submit
               </button>

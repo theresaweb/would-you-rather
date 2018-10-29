@@ -15,11 +15,11 @@ class Homepage extends Component {
     }))
   }
   render() {
-    function isSameAsAnsweredState(choice1, choice2, answered) {
-      return (choice1.length + choice2.length > 0) === answered
+    function isSameAsAnsweredState(choice1, choice2, authedUser, answered) {
+      return (choice1.includes(authedUser) || choice2.includes(authedUser)) === answered
     }
-    var filteredPolls = this.props.polls.filter(poll => isSameAsAnsweredState(poll.choice1, poll.choice2, this.state.answered))
     const { authedUser } = this.props
+    const filteredPolls = this.props.polls.filter(poll => isSameAsAnsweredState(poll.choice1, poll.choice2, authedUser, this.state.answered))
     if (authedUser === '') {
      return (
        <div className="homepage">
