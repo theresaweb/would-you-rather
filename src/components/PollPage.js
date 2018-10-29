@@ -6,54 +6,68 @@ import TakePoll from './TakePoll'
 import './PollPage.css'
 
 class PollPage extends Component {
-  render() {
-    const { id, poll, authedUser } = this.props
-    if(poll === undefined) {
-      return <Redirect to='/notfound' />
-    }
-    const totalAnswers = poll.choice1.length + poll.choice2.length
-    const percChoice1 = totalAnswers > 0 ? parseInt((poll.choice1.length / totalAnswers) * 100, 10) : 0
-    const userChosen = findAuthedUserChoice(authedUser)
-    function findAuthedUserChoice () {
-      if(poll.choice1.includes(authedUser)) {
-        return poll.choicesTxt[0]
-      } else if (poll.choice2.includes(authedUser)) {
-        return poll.choicesTxt[1]
-      } else {
-        return false
-      }
-    }
-    if (authedUser === '') {
-     return (
-       <h1 className="pleaseLogin">
-         Please <a href="/login">login</a>
-       </h1>
-     )} else {
-      return (
-        <div className='pollPage'>
-          <h1>WOULD YOU RATHER???</h1>
-          <Poll id={id} />
-            <div className='pollDetails'>
-              {totalAnswers > 0 &&
-                <h2 className='pollTotals'>Total Votes: {totalAnswers}</h2>
-              }
-              {userChosen ?
-                <h2 className='pollChosen'>You chose {userChosen}</h2>
-              :
-                <TakePoll id={id} />
-              }
-              {totalAnswers > 0 &&
-              <div className="pollResults">
-                <h4>{poll.choicesTxt[0]} - {percChoice1}%</h4>
-                <h4 className='pollChoice2'>{poll.choicesTxt[1]} - {100 - percChoice1}%</h4>
-                <progress className="pollResults-1" max="100" value={percChoice1}>
-                </progress>
-              </div>
-              }
+  state = {
+    userTaken: false
+  }
+componentDidMount() {
+  const { id, poll, authedUser } = this.props
+  const userHasTaken = poll.choice1.includes(authedUser) || poll.choice2.includes(authedUser)
+  this.setState({
+    userTaken: userHasTaken
+  })
+}
+findAuthedUserChoice (poll, authedUser) {
+  if(poll.choice1.includes(authedUser)) {
+    return poll.choicesTxt[0]
+  } else if (poll.choice2.includes(authedUser)) {
+    return poll.choicesTxt[1]
+  } else {
+    return false
+  }
+}
+render() {
+  const { id, poll, authedUser } = this.props
+  const userChosen = ''
+  if(poll === undefined) {
+    return <Redirect to='/notfound' />
+  }
+  const totalAnswers = poll.choice1.length + poll.choice2.length
+  const percChoice1 = totalAnswers > 0 ? parseInt((poll.choice1.length / totalAnswers) * 100, 10) : 0
+  if (this.state.userTaken) {
+    const userChosen = this.findAuthedUserChoice(poll, authedUser)
+  }
+  if (authedUser === '') {
+   return (
+     <h1 className="pleaseLogin">
+       Please <a href="/login">login</a>
+     </h1>
+   )} else {
+    return (
+      <div className='pollPage'>
+        <h1>WOULD YOU RATHER???</h1>
+        <Poll id={id} />
+          <div className='pollDetails'>
+            {totalAnswers > 0 &&
+              <h2 className='pollTotals'>Total Votes So Far: {totalAnswers}</h2>
+            }
+            {this.state.userTaken ?
+              <h2 className='pollChosen'>You chose {userChosen}</h2>
+            :
+              <TakePoll id={id} />
+            }
+            {totalAnswers > 0 &&
+              this.state.userTaken &&
+            <div className="pollResults">
+              <h4>{poll.choicesTxt[0]} - {percChoice1}%</h4>
+              <h4 className='pollChoice2'>{poll.choicesTxt[1]} - {100 - percChoice1}%</h4>
+              <progress className="pollResults-1" max="100" value={percChoice1}>
+              </progress>
             </div>
-        </div>
-      )
-    }
+            }
+          </div>
+      </div>
+    )
+  }
   }
 }
 function mapStateToProps ({ authedUser, polls, users }, props) {
