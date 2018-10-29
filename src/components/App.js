@@ -30,7 +30,7 @@ class App extends Component {
                   <Route path='/' exact component={Homepage} />
                   <Route path='/login' component={Login} />
                   <Route path='/logout' component={Logout} />
-                  <Route path='/poll/:id' component={PollPage} />
+                  <Route path='/questions/:id' component={PollPage} />
                   <Route path='/new' component={NewPoll} />
                   <Route path='/leaderboard' component={Leaderboard} />
                   <Route path='/notfound' component={NotFound} />

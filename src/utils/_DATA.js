@@ -119,24 +119,6 @@ export function _getPolls () {
   })
 }
 
-// export function _saveLikeToggle ({ id, hasLiked, authedUser }) {
-//   return new Promise((res, rej) => {
-//     setTimeout(() => {
-//       tweets = {
-//         ...tweets,
-//         [id]: {
-//           ...tweets[id],
-//           likes: hasLiked === true
-//             ? tweets[id].likes.filter((uid) => uid !== authedUser)
-//             : tweets[id].likes.concat([authedUser])
-//         }
-//       }
-//
-//       res()
-//     }, 500)
-//   })
-// }
-
 function generateUID () {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
@@ -170,6 +152,36 @@ export function _savePoll ({ choicesTxt, author }) {
         }
       }
       res(formattedPoll)
+    }, 1000)
+  })
+}
+
+export function _saveChoice ({ id, choice, authedUser }) {
+  return new Promise((res, rej) => {
+    console.log("polls", polls)
+    console.log("id",id)
+    console.log("polls-id",polls[id])
+    const pollToUpdate = polls[id]
+    console.log("authedUser",authedUser)
+    console.log("pollToUpdate1",pollToUpdate)
+    if (choice === pollToUpdate.choicesTxt[0]) {
+      console.log("here")
+      pollToUpdate.choice1.push(authedUser)
+    } else {
+      pollToUpdate.choice2.push(authedUser)
+    }
+    console.log("pollToUpdate2",pollToUpdate)
+    const updatedPolls = polls
+    updatedPolls[id] = pollToUpdate
+    console.log("updatedPolls",updatedPolls)
+    setTimeout(() => {
+      polls = {
+        ...updatedPolls,
+      }
+      users = {
+        ...users,
+      }
+      res(updatedPolls)
     }, 1000)
   })
 }

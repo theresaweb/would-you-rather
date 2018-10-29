@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Poll from './Poll'
+import TakePoll from './TakePoll'
 import './PollPage.css'
-//import NewPoll from './NewPoll'
 
 class PollPage extends Component {
   render() {
@@ -34,30 +34,35 @@ class PollPage extends Component {
           <h1>WOULD YOU RATHER???</h1>
           <Poll id={id} />
             <div className='pollDetails'>
-              <h2 className='pollTotals'>Total Votes: {totalAnswers}</h2>
-              {userChosen &&
-                <h2 className='pollChosen'>You chose {userChosen}</h2>
+              {totalAnswers > 0 &&
+                <h2 className='pollTotals'>Total Votes: {totalAnswers}</h2>
               }
+              {userChosen ?
+                <h2 className='pollChosen'>You chose {userChosen}</h2>
+              :
+                <TakePoll id={id} />
+              }
+              {totalAnswers > 0 &&
               <div className="pollResults">
                 <h4>{poll.choicesTxt[0]} - {percChoice1}%</h4>
                 <h4 className='pollChoice2'>{poll.choicesTxt[1]} - {100 - percChoice1}%</h4>
                 <progress className="pollResults-1" max="100" value={percChoice1}>
                 </progress>
               </div>
+              }
             </div>
         </div>
       )
     }
   }
 }
- function mapStateToProps ({ authedUser, polls, users }, props) {
+function mapStateToProps ({ authedUser, polls, users }, props) {
   const { id } = props.match.params
   const thePolls = [];
   Object.entries(polls).forEach(([key, value]) => {
     thePolls.push(value)
   });
   const poll = thePolls.filter((p) => p.id === id)[0]
-  console.log("poll is?",poll)
   return {
     authedUser,
     id,

@@ -24,7 +24,7 @@ class Poll extends Component {
           id, author, timestamp, choicesTxt, choice1, choice2
         } = poll
        return (
-        <Link to={`/poll/${id}`} className='poll'>
+        <Link to={`/questions/${id}`} className='poll'>
           <div className='pollInfo'>
               <span style={{display:'none'}}>{id}</span>
               <h4 className="pollTitle"><img className='avatar' alt={authedUser} src={avatarUrl} />Created by <span>{author}</span> on <span>{formatDate(timestamp)}</span></h4>

@@ -4,7 +4,7 @@ import { receivePolls } from '../actions/polls'
 import { setAuthedUser } from '../actions/authedUser'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
- const AUTHED_ID = ''
+ const AUTHED_ID = 'dog_lover'
  export function handleInitialData () {
   return (dispatch) => {
     dispatch(showLoading())

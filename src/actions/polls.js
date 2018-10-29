@@ -1,4 +1,4 @@
-import {  savePoll } from '../utils/api'
+import {  savePoll, saveChoice } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 export const ADD_POLL = 'ADD_POLL'
@@ -19,6 +19,18 @@ function addPoll (poll) {
       .then((poll) => dispatch(addPoll(poll)))
       .then(() => dispatch(hideLoading()))
   }
+}
+export function takePoll (id, choice, authedUser) {
+ return (dispatch, getState) => {
+   const { authedUser, polls, users } = getState()
+    dispatch(showLoading())
+    return saveChoice({
+     id,
+     choice,
+     authedUser
+   })
+   .then(() => dispatch(hideLoading()))
+ }
 }
 export const RECEIVE_POLLS = 'RECEIVE_POLLS'
  export function receivePolls (polls) {

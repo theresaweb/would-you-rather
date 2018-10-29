@@ -2,6 +2,7 @@ import {
   _getUsers,
   _getPolls,
   _savePoll,
+  _saveChoice,
 } from './_DATA.js'
 
 export function getInitialData () {
@@ -16,4 +17,8 @@ export function getInitialData () {
 
 export function savePoll (info) {
   return _savePoll(info)
+}
+export function saveChoice (info) {
+  console.log("info",info)
+  return _saveChoice(info)
 }
