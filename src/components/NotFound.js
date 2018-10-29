@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom';
 import logo from './images/404.jpg';
 
 const NotFound = () => (
   <div>
-    <img src={logo} style={{display: 'block', margin: 'auto', }} />
+    <img src={logo} alt="not found" style={{display: 'block', margin: 'auto', }} />
   </div>
 );
 function mapStateToProps ({authedUser}) {

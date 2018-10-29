@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 class Leaderboard extends Component {
   render() {
     console.log("leaderboard")
-    const { authedUser, polls, users } = this.props
+    const { authedUser } = this.props
     if (authedUser === '') {
      return (
      <h1 className="pleaseLogin">

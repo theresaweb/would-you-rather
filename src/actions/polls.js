@@ -22,7 +22,7 @@ function addPoll (poll) {
 }
 export function takePoll (id, choice, authedUser) {
  return (dispatch, getState) => {
-   const { authedUser, polls, users } = getState()
+   const { authedUser } = getState()
     dispatch(showLoading())
     return saveChoice({
      id,

@@ -21,7 +21,6 @@ class TakePoll extends Component {
   }
   render() {
     const { poll } = this.props
-    const { choice1, choice2 } = this.state
     return (
       <div className='takePoll'>
         <form onSubmit={(e) => this.handleSubmit}>

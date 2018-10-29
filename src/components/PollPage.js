@@ -10,10 +10,11 @@ class PollPage extends Component {
     userTaken: false
   }
 componentDidMount() {
-  const { id, poll, authedUser } = this.props
+  const { poll, authedUser } = this.props
   const userHasTaken = poll.choice1.includes(authedUser) || poll.choice2.includes(authedUser)
   this.setState({
-    userTaken: userHasTaken
+    userTaken: userHasTaken,
+    userChosen: ''
   })
 }
 findAuthedUserChoice (poll, authedUser) {
@@ -27,14 +28,16 @@ findAuthedUserChoice (poll, authedUser) {
 }
 render() {
   const { id, poll, authedUser } = this.props
-  const userChosen = ''
   if(poll === undefined) {
     return <Redirect to='/notfound' />
   }
   const totalAnswers = poll.choice1.length + poll.choice2.length
   const percChoice1 = totalAnswers > 0 ? parseInt((poll.choice1.length / totalAnswers) * 100, 10) : 0
   if (this.state.userTaken) {
-    const userChosen = this.findAuthedUserChoice(poll, authedUser)
+    const userAnswer = this.findAuthedUserChoice(poll, authedUser)
+    this.setState({
+      userChosen: userAnswer
+    })
   }
   if (authedUser === '') {
    return (
@@ -51,7 +54,7 @@ render() {
               <h2 className='pollTotals'>Total Votes So Far: {totalAnswers}</h2>
             }
             {this.state.userTaken ?
-              <h2 className='pollChosen'>You chose {userChosen}</h2>
+              <h2 className='pollChosen'>You chose {this.state.userChosen}</h2>
             :
               <TakePoll id={id} />
             }
