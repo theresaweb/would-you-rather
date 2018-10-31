@@ -158,22 +158,14 @@ export function _savePoll ({ choicesTxt, author }) {
 
 export function _saveChoice ({ id, choice, authedUser }) {
   return new Promise((res, rej) => {
-    console.log("polls", polls)
-    console.log("id",id)
-    console.log("polls-id",polls[id])
     const pollToUpdate = polls[id]
-    console.log("authedUser",authedUser)
-    console.log("pollToUpdate1",pollToUpdate)
     if (choice === pollToUpdate.choicesTxt[0]) {
-      console.log("here")
       pollToUpdate.choice1.push(authedUser)
     } else {
       pollToUpdate.choice2.push(authedUser)
     }
-    console.log("pollToUpdate2",pollToUpdate)
     const updatedPolls = polls
     updatedPolls[id] = pollToUpdate
-    console.log("updatedPolls",updatedPolls)
     setTimeout(() => {
       polls = {
         ...updatedPolls,

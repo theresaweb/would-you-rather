@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatPoll, formatDate } from '../utils/helpers'
 import { Link, withRouter } from 'react-router-dom'
-import './Poll.css'
+import './css/Poll.css'
 
 class Poll extends Component {
 
   handleLike = (e) => {
     e.preventDefault()
-     // todo: Handle Like Tweet
   }
   toParent = (e, id) => {
     e.preventDefault()
@@ -16,7 +15,7 @@ class Poll extends Component {
   }
 
   render() {
-    const { authedUser, poll, avatarUrl } = this.props
+    const { poll, avatarUrl } = this.props
         if (poll === null) {
           return <p>This Poll doesn't exist</p>
         }
@@ -50,11 +49,10 @@ class Poll extends Component {
       )
   }
 }
- function mapStateToProps ({authedUser, users, polls}, { id }) {
+ function mapStateToProps ({ users, polls}, { id }) {
   const poll = polls[id]
   const pollAuther = users[poll.author]
    return {
-    authedUser,
     avatarUrl: pollAuther.avatarURL,
     poll: poll
       ? formatPoll(poll, users[poll.author])

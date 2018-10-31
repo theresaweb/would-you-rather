@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Poll from './Poll'
-import './Homepage.css'
+import './css/Homepage.css'
 
 class Homepage extends Component {
   state = {
     answered: false,
   }
   handleChange = (e) => {
-    console.log(e.target.checked)
     const answered = e.target.checked
      this.setState(() => ({
       answered

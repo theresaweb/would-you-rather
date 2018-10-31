@@ -1,0 +1,19 @@
+.login {
+  padding: 20px;
+  width: 30%;
+  margin: 20px auto;
+  background: beige;
+  border-radius: 20px;
+}
+.login form {
+  display: flex;
+  flex-direction: column;
+}
+.login form h2 {
+  color: darkcyan;
+  margin: 10px;
+}
+.login form select {
+  width: 40%;
+  margin: 0 auto;
+}

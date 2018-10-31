@@ -3,13 +3,21 @@
   width: 80%;
   margin: 20px auto;
   background: beige;
+  border-radius: 20px;
 }
 .takePoll form {
   display: flex;
   flex-direction: column;
 }
+.takePoll form h2 {
+  color: darkcyan;
+  margin: 10px;
+}
 .pollRadioFields {
   display: flex;
+}
+.pollRadioFields input {
+  margin-right: 10px;
 }
 .pollRadio {
   flex-grow: 1;

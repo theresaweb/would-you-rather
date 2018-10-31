@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import './Leaderboard.css'
+import './css/Leaderboard.css'
 
 class Leaderboard extends Component {
   render() {
@@ -13,7 +13,8 @@ class Leaderboard extends Component {
     )} else {
       return (
         <div className="leaderboard">
-          <h1>Leaderboard</h1>
+          <h1>WOULD YOU RATHER???</h1>
+          <h2>Leaderboard</h2>
           <ul className="leaderboard-list">
           {users.map((user) => {
             const authoredCount = polls.filter((poll) => poll.author === user.id)
@@ -31,12 +32,6 @@ class Leaderboard extends Component {
         </div>
       )
     }
-
-
-
-
-
-
   }
 }
 function mapStateToProps ({ polls, users, authedUser }) {
@@ -46,7 +41,6 @@ function mapStateToProps ({ polls, users, authedUser }) {
   });
   const theUsers = []
   Object.entries(users).forEach(([key, value]) => {
-    console.log("value",value)
     const authoredCount = thePolls.filter((poll) => poll.author === value.id).length
     const pollsAnsweredCount = thePolls.filter((poll) => (poll.choice1.includes(value.id) || poll.choice2.includes(value.id))).length
     const totalAuthorAnswered = authoredCount + pollsAnsweredCount

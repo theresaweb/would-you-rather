@@ -1,0 +1,28 @@
+.newPoll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.newPoll-content {
+    display: flex;
+    flex-direction: column;
+    line-height: 50px;
+    border: 1px solid #CAD0D2;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+.newPoll-content h3 {
+    color: darkcyan;
+    font-size: 2em;
+    line-height: 2em;
+    margin: 0;
+    text-align: center;
+}
+.newPoll-content input {
+    margin: 0 10px;
+    border-radius: 5px;
+}

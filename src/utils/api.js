@@ -19,6 +19,5 @@ export function savePoll (info) {
   return _savePoll(info)
 }
 export function saveChoice (info) {
-  console.log("info",info)
   return _saveChoice(info)
 }

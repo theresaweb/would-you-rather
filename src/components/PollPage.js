@@ -3,17 +3,14 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Poll from './Poll'
 import TakePoll from './TakePoll'
-import './PollPage.css'
+import './css/PollPage.css'
 
 class PollPage extends Component {
 constructor(props) {
   super(props)
   const { poll, authedUser } = this.props
   const userHasTaken = poll.choice1.includes(authedUser) || poll.choice2.includes(authedUser)
-  console.log("userHasTaken",userHasTaken)
-
   const userAnswer = userHasTaken ? this.findAuthedUserChoice(poll, authedUser) : ''
-  console.log("userAnser",userAnswer)
   this.state = {
     userTaken: userHasTaken,
     userChosen: userAnswer
@@ -29,8 +26,6 @@ findAuthedUserChoice (poll, authedUser) {
   }
 }
 handleTakenChange(taken, selection) {
-  console.log("taken",taken)
-  console.log("selection",selection)
   this.setState({
     userTaken: taken,
     userChosen: selection
@@ -44,8 +39,6 @@ render() {
   const totalAnswers = poll.choice1.length + poll.choice2.length
   const percChoice1 = totalAnswers > 0 ? parseInt((poll.choice1.length / totalAnswers) * 100, 10) : 0
   const percChoice2 = 100 - percChoice1
-  console.log("percChoice1",percChoice1)
-  console.log("percChoice2",percChoice2)
   if (authedUser === '') {
    return (
      <h1 className="pleaseLogin">
@@ -57,8 +50,15 @@ render() {
         <h1>WOULD YOU RATHER???</h1>
         <Poll id={id} />
           <div className='pollDetails'>
-            {totalAnswers > 0 &&
+            {totalAnswers > 0 && 
+              this.state.userTaken &&
+            <div>
               <h2 className='pollTotals'>Total Votes So Far: {totalAnswers}</h2>
+              <ul>
+                <li>Answered {poll.choicesTxt[0]}: {poll.choice1.length}</li>
+                <li>Answered {poll.choicesTxt[1]}: {poll.choice2.length}</li>
+              </ul>
+            </div>
             }
             {this.state.userTaken ?
               <h2 className='pollChosen'>You chose {this.state.userChosen}</h2>

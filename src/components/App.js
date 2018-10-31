@@ -11,7 +11,7 @@ import PollPage from './PollPage'
 import Leaderboard from './Leaderboard'
 import NotFound from './NotFound'
 import Nav from './Nav'
-import './App.css'
+import './css/App.css'
 
 class App extends Component {
   componentDidMount() {
@@ -31,7 +31,7 @@ class App extends Component {
                   <Route path='/login' component={Login} />
                   <Route path='/logout' component={Logout} />
                   <Route path='/questions/:id' component={PollPage} />
-                  <Route path='/new' component={NewPoll} />
+                  <Route path='/add' component={NewPoll} />
                   <Route path='/leaderboard' component={Leaderboard} />
                   <Route path='/notfound' component={NotFound} />
                 </div>}

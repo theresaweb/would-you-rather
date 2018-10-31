@@ -60,3 +60,6 @@ progress, progress[role] {
   margin: 10px auto;
   padding: 10px 0;
 }
+.pollDetails ul {
+  list-style: none;
+}

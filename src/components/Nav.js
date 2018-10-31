@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import './Nav.css'
+import './css/Nav.css'
 
 class Nav extends Component {
   render() {
@@ -15,7 +15,7 @@ class Nav extends Component {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/new' activeClassName='active'>
+            <NavLink to='/add' activeClassName='active'>
               New Poll
             </NavLink>
           </li>

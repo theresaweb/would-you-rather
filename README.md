@@ -6,9 +6,12 @@ To run
 1. clone from https://github.com/theresaweb/would-you-rather
 2. cd to local folder and run `npm install`
 3. open browser to localhost:3000
+** NOTE I did not use the starter code created here https://github.com/udacity/reactnd-project-would-you-rather-starter, I created my own normalized _DATA.js file representing a fake database and some methods to access the data.
 
+TODO: enhancements
+* Create user functionality (currently user spoofs existing user)
 
-A Guide for the Planning Stages of Your Project
+Performed Planning Stages of the Project
 * Identify What Each View Should Look Like
   * Login view
     * user can upload avatar
