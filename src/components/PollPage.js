@@ -6,16 +6,18 @@ import TakePoll from './TakePoll'
 import './PollPage.css'
 
 class PollPage extends Component {
-  state = {
-    userTaken: false
-  }
-componentDidMount() {
+constructor(props) {
+  super(props)
   const { poll, authedUser } = this.props
   const userHasTaken = poll.choice1.includes(authedUser) || poll.choice2.includes(authedUser)
-  this.setState({
+  console.log("userHasTaken",userHasTaken)
+
+  const userAnswer = userHasTaken ? this.findAuthedUserChoice(poll, authedUser) : ''
+  console.log("userAnser",userAnswer)
+  this.state = {
     userTaken: userHasTaken,
-    userChosen: ''
-  })
+    userChosen: userAnswer
+  }
 }
 findAuthedUserChoice (poll, authedUser) {
   if(poll.choice1.includes(authedUser)) {
@@ -26,6 +28,14 @@ findAuthedUserChoice (poll, authedUser) {
     return false
   }
 }
+handleTakenChange(taken, selection) {
+  console.log("taken",taken)
+  console.log("selection",selection)
+  this.setState({
+    userTaken: taken,
+    userChosen: selection
+  })
+}
 render() {
   const { id, poll, authedUser } = this.props
   if(poll === undefined) {
@@ -33,12 +43,9 @@ render() {
   }
   const totalAnswers = poll.choice1.length + poll.choice2.length
   const percChoice1 = totalAnswers > 0 ? parseInt((poll.choice1.length / totalAnswers) * 100, 10) : 0
-  if (this.state.userTaken) {
-    const userAnswer = this.findAuthedUserChoice(poll, authedUser)
-    this.setState({
-      userChosen: userAnswer
-    })
-  }
+  const percChoice2 = 100 - percChoice1
+  console.log("percChoice1",percChoice1)
+  console.log("percChoice2",percChoice2)
   if (authedUser === '') {
    return (
      <h1 className="pleaseLogin">
@@ -56,13 +63,13 @@ render() {
             {this.state.userTaken ?
               <h2 className='pollChosen'>You chose {this.state.userChosen}</h2>
             :
-              <TakePoll id={id} />
+              <TakePoll id={id} userTaken={this.state.userTaken} onTakenChange={this.handleTakenChange.bind(this)}/>
             }
             {totalAnswers > 0 &&
               this.state.userTaken &&
             <div className="pollResults">
-              <h4>{poll.choicesTxt[0]} - {percChoice1}%</h4>
-              <h4 className='pollChoice2'>{poll.choicesTxt[1]} - {100 - percChoice1}%</h4>
+              <h4>{percChoice1 > 0 ? poll.choicesTxt[0] + '-' + percChoice1 + '%' : ''}</h4>
+              <h4 className='pollChoice2'>{percChoice2 > 0 ? poll.choicesTxt[1] + '-' + percChoice2 + '%' : ''}</h4>
               <progress className="pollResults-1" max="100" value={percChoice1}>
               </progress>
             </div>

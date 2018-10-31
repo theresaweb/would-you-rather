@@ -2,17 +2,17 @@ let users = {
   dog_lover: {
     id: "dog_lover",
     name: "Dog Lover",
-    avatarURL: "https://loremflickr.com/240/240/dog?lock=1",
+    avatarURL: "https://loremflickr.com/240/240/dog?lock=40",
   },
   alacazam: {
     id: "alacazam",
     name: "Alexandria Kazam",
-    avatarURL: "https://loremflickr.com/240/240/dog?lock=2",
+    avatarURL: "https://loremflickr.com/240/240/dog?lock=24",
   },
   shoes_hats: {
     id: "shoes_hats",
     name: "Mary Smith",
-    avatarURL: "https://loremflickr.com/240/240/dog?lock=3",
+    avatarURL: "https://loremflickr.com/240/240/dog?lock=39",
   }
 }
 

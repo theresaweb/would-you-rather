@@ -15,15 +15,18 @@ class TakePoll extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
+    console.log("e.target",e.target)
     const { id, authedUser, dispatch } = this.props
     const radioValue = document.querySelector('input[name="takePoll"]:checked').value
     dispatch(takePoll(id, radioValue, authedUser))
+    this.props.onTakenChange(true, radioValue)
   }
   render() {
-    const { poll } = this.props
+    const { poll, userTaken } = this.props
+    console.log("usertaken in takepoll",userTaken)
     return (
       <div className='takePoll'>
-        <form onSubmit={(e) => this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
             <h2>Take this poll</h2>
             <div className='pollRadioFields'>
               <div className='pollRadio'>

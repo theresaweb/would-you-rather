@@ -27,7 +27,7 @@ class Poll extends Component {
         <Link to={`/questions/${id}`} className='poll'>
           <div className='pollInfo'>
               <span style={{display:'none'}}>{id}</span>
-              <h4 className="pollTitle"><img className='avatar' alt={authedUser} src={avatarUrl} />Created by <span>{author}</span> on <span>{formatDate(timestamp)}</span></h4>
+              <h4 className="pollTitle"><img className='avatar' alt={author} src={avatarUrl} />Created by <span>{author}</span> on <span>{formatDate(timestamp)}</span></h4>
               <div className="pollChoices"><div>{choicesTxt[0]}</div><div style={{color:'black'}}>OR</div><div>{choicesTxt[1]}</div></div>
               {this.props.answered && (
               <div className="pollAnswers">
