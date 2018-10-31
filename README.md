@@ -10,6 +10,8 @@ To run
 
 TODO: enhancements
 * Create user functionality (currently user spoofs existing user)
+* Add authentication
+* Add a UI framework 
 
 Performed Planning Stages of the Project
 * Identify What Each View Should Look Like
