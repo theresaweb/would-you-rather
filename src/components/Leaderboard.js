@@ -1,38 +1,36 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import './css/Leaderboard.css'
 
-class Leaderboard extends Component {
-  render() {
-    const { authedUser, users, polls } = this.props
+const filterAuther = (polls, id) => polls.filter((poll) => poll.author === id).length
+const filterAnsweredPolls = (polls, id) =>
+  polls.filter((poll) => poll.choice1.includes(id) || poll.choice2.includes(id)).length
+
+const Leaderboard = ({ authedUser, users, polls }) => {
     if (authedUser === '') {
      return (
      <h1 className="pleaseLogin">
        Please <a href="/login">login</a>
      </h1>
-    )} else {
-      return (
-        <div className="leaderboard">
-          <h1>WOULD YOU RATHER???</h1>
-          <h2>Leaderboard</h2>
-          <ul className="leaderboard-list">
-          {users.map((user) => {
-            const authoredCount = polls.filter((poll) => poll.author === user.id)
-            const pollsAnsweredCount = polls.filter((poll) => (poll.choice1.includes(user.id) || poll.choice2.includes(user.id)))
-            return (
-              <li key={user.id}><span className="info">
-                <div className="userInfo"><img className="avatar" src={user.avatarURL} alt={user.name} /><span className="userName">{user.name}</span></div>
-                <div><strong>Polls created: </strong>{authoredCount.length}</div>
-                <div><strong>Polls answered: </strong>{pollsAnsweredCount.length}</div>
-              </span>
-              </li>
-            )
-          })}
-          </ul>
-        </div>
-      )
-    }
-  }
+    )}
+    return (
+      <div className="leaderboard">
+        <h1>WOULD YOU RATHER???</h1>
+        <h2>Leaderboard</h2>
+        <ul className="leaderboard-list">
+        {users.map(({ id, avatarURL, name }) => {
+          return (
+            <li key={id}><span className="info">
+              <div className="userInfo"><img className="avatar" src={avatarURL} alt={name} /><span className="userName">{name}</span></div>
+              <div><strong>Polls created: </strong>{filterAuther(polls, id)}</div>
+              <div><strong>Polls answered: </strong>{filterAnsweredPolls(polls, id)}</div>
+            </span>
+            </li>
+          )
+        })}
+        </ul>
+      </div>
+    )
 }
 function mapStateToProps ({ polls, users, authedUser }) {
   const thePolls = []
