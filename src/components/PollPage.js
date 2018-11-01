@@ -6,6 +6,10 @@ import TakePoll from './TakePoll'
 import './css/PollPage.css'
 
 class PollPage extends Component {
+state = {
+  userTaken: false,
+  userChosen: ''
+}
 findAuthedUserChoice (poll, authedUser) {
   if(poll.choice1.includes(authedUser)) {
     return poll.choicesTxt[0]
@@ -31,10 +35,7 @@ render() {
   const percChoice2 = 100 - percChoice1
   const userHasTaken = poll.choice1.includes(authedUser) || poll.choice2.includes(authedUser)
   const userAnswer = userHasTaken ? this.findAuthedUserChoice(poll, authedUser) : ''
-  this.state = {
-    userTaken: userHasTaken,
-    userChosen: userAnswer
-  }
+
   if (authedUser === '') {
    return (
      <h1 className="pleaseLogin">
@@ -47,7 +48,7 @@ render() {
         <Poll id={id} />
           <div className='pollDetails'>
             {totalAnswers > 0 &&
-              this.state.userTaken &&
+              userAnswer &&
             <div>
               <h2 className='pollTotals'>Total Votes So Far: {totalAnswers}</h2>
               <ul>
@@ -56,13 +57,13 @@ render() {
               </ul>
             </div>
             }
-            {this.state.userTaken ?
-              <h2 className='pollChosen'>You chose {this.state.userChosen}</h2>
+            {userHasTaken ?
+              <h2 className='pollChosen'>You chose {userAnswer}</h2>
             :
               <TakePoll id={id} userTaken={this.state.userTaken} onTakenChange={this.handleTakenChange.bind(this)}/>
             }
             {totalAnswers > 0 &&
-              this.state.userTaken &&
+              userAnswer &&
             <div className="pollResults">
               <h4>{percChoice1 > 0 ? poll.choicesTxt[0] + '-' + percChoice1 + '%' : ''}</h4>
               <h4 className='pollChoice2'>{percChoice2 > 0 ? poll.choicesTxt[1] + '-' + percChoice2 + '%' : ''}</h4>
