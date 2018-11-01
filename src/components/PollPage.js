@@ -41,7 +41,7 @@ render() {
      <h1 className="pleaseLogin">
        Please <a href="/login">login</a>
      </h1>
-   )} else {
+   )}
     return (
       <div className='pollPage'>
         <h1>WOULD YOU RATHER???</h1>
@@ -74,7 +74,6 @@ render() {
           </div>
       </div>
     )
-  }
   }
 }
 function mapStateToProps ({ authedUser, polls, users }, props) {

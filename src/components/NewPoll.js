@@ -30,46 +30,46 @@ class NewPoll extends Component {
     const { authedUser } = this.props
     const { choicesTxt, toHome } = this.state
     if (authedUser === '') {
-     return (
-     <h1 className="pleaseLogin">
-       Please <a href="/login">login</a>
-     </h1>
-    )} else {
-      if (toHome === true) {
-        return <Redirect to='/' />
-      }
        return (
-        <div className="newPoll">
-        <h1>WOULD YOU RATHER???</h1>
-          <div className="newPoll-content">
-            <h3>Create a Poll</h3>
-            <form className='new-poll' onSubmit={this.handleSubmit}>
-              <input
-                className="choiceTxt"
-                value={choicesTxt[0] || ''}
-                onChange={(e) => this.handleChange(e, 0)}
-                maxLength={280}
-                placeholder="Choice 1"
-              />
-              <span>OR</span>
-              <input
-                className="choiceTxt"
-                value={choicesTxt[1] || ''}
-                onChange={(e) => this.handleChange(e, 1)}
-                maxLength={280}
-                placeholder="Choice 2"
-              />
-              <button
-                className='btn'
-                type='submit'
-                disabled={choicesTxt.length < 2}>
-                  Submit
-              </button>
-            </form>
-            </div>
-        </div>
+       <h1 className="pleaseLogin">
+         Please <a href="/login">login</a>
+       </h1>
       )
     }
+    if (toHome === true) {
+      return <Redirect to='/' />
+    }
+    return (
+      <div className="newPoll">
+      <h1>WOULD YOU RATHER???</h1>
+        <div className="newPoll-content">
+          <h3>Create a Poll</h3>
+          <form className='new-poll' onSubmit={this.handleSubmit}>
+            <input
+              className="choiceTxt"
+              value={choicesTxt[0] || ''}
+              onChange={(e) => this.handleChange(e, 0)}
+              maxLength={280}
+              placeholder="Choice 1"
+            />
+            <span>OR</span>
+            <input
+              className="choiceTxt"
+              value={choicesTxt[1] || ''}
+              onChange={(e) => this.handleChange(e, 1)}
+              maxLength={280}
+              placeholder="Choice 2"
+            />
+            <button
+              className='btn'
+              type='submit'
+              disabled={choicesTxt.length < 2}>
+                Submit
+            </button>
+          </form>
+          </div>
+      </div>
+    )
   }
 }
 function mapStateToProps ({ polls, users, authedUser }) {
