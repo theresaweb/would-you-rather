@@ -3,51 +3,53 @@ import { connect } from 'react-redux'
 import Poll from './Poll'
 import './css/Homepage.css'
 
+function isSameAsAnsweredState(choice1, choice2, authedUser, answered) {
+  return (choice1.includes(authedUser) || choice2.includes(authedUser)) === answered
+}
 class Homepage extends Component {
   state = {
     answered: false,
   }
   handleChange = (e) => {
-    const answered = e.target.checked
-     this.setState(() => ({
-      answered
-    }))
+    const { checked } = e.target
+    if (this.state.answered !== checked) {
+      this.setState((prevState) => ({
+        answered: !prevState.answered
+      }))
+    }
   }
   render() {
-    function isSameAsAnsweredState(choice1, choice2, authedUser, answered) {
-      return (choice1.includes(authedUser) || choice2.includes(authedUser)) === answered
-    }
     const { authedUser } = this.props
-    const filteredPolls = this.props.polls.filter(poll => isSameAsAnsweredState(poll.choice1, poll.choice2, authedUser, this.state.answered))
-    if (authedUser === '') {
-     return (
-       <div className="homepage">
-         <h1>WOULD YOU RATHER???</h1>
-         <h2 className="pleaseLogin">
-           Please <a href="/login">login</a>
-         </h2>
-       </div>
-   )} else {
-     return (
+    const { answered } = this.state
+    const filteredPolls = this.props.polls.filter(poll => isSameAsAnsweredState(poll.choice1, poll.choice2, authedUser, answered))
+    if(authedUser === '')
+       return (
+         <div className="homepage">
+           <h1>WOULD YOU RATHER???</h1>
+           <h2 className="pleaseLogin">
+             Please <a href="/login">login</a>
+           </h2>
+         </div>
+       )
+       return (
          <div>
            <div className="homepage">
              <h1>WOULD YOU RATHER???</h1>
-             <div className="answeredToggle">{this.state.answered ? "answered" : "unanswered"}</div>
+             <div className="answeredToggle">{answered ? "answered" : "unanswered"}</div>
              <label className="switch">
                <input type="checkbox" onChange={this.handleChange} />
                <span className="slider round"></span>
              </label>
              <ul className='homepage-list'>
-               {filteredPolls.map((poll) => (
-                 <li key={poll.id}>
-                   <Poll id={poll.id} answered={this.state.answered}/>
+               {filteredPolls.map(({id}) => (
+                 <li key={id}>
+                   <Poll id={id} answered={answered}/>
                  </li>
                ))}
              </ul>
            </div>
          </div>
-     )
-   }
+       )
   }
 }
  function mapStateToProps ({ polls, users, authedUser }) {
