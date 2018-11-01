@@ -5,7 +5,7 @@ import './css/Nav.css'
 
 class Nav extends Component {
   render() {
-    const { authedUser } = this.props
+    const { authedUser, usersName } = this.props
     return (
       <nav className='nav'>
         <ul>
@@ -28,7 +28,7 @@ class Nav extends Component {
         <ul className="loginNav">
             {authedUser ?
               <li>
-                <span className="navUsername">Hi {authedUser}</span>
+                <span className="navUsername">Hi {usersName}</span>
               </li>
               :
               <li>
@@ -52,8 +52,18 @@ class Nav extends Component {
   }
 }
 function mapStateToProps ({authedUser, users, polls}) {
+  const theUsers = []
+  Object.entries(users).forEach(([key, value]) => {
+    theUsers.push(value)
+  });
+  let usersName = ''
+  const thisUser = theUsers.filter(user => user.id === authedUser)[0]
+  if (thisUser) {
+    usersName = thisUser.name
+  }
  return {
-   authedUser
+   authedUser,
+   usersName: usersName
  }
 }
 export default connect(mapStateToProps, null, null, { pure: false })(Nav)
