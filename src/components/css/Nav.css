@@ -22,3 +22,8 @@ nav a:hover, nav a.active {
 .loginNav {
   justify-content: flex-end;
 }
+li.divider:after {
+  content: '|';
+  color: white;
+  line-height: 2.4em;
+}

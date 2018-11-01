@@ -1,29 +1,29 @@
-import React, { Component } from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import './css/Nav.css'
 
-class Nav extends Component {
-  render() {
-    const { authedUser, usersName } = this.props
+function navLinks() {
+  const links = [
+    ['/','Home'],
+    ['/add','New Poll'],
+    ['/leaderboard','Leaderboard']
+  ]
+  return (
+    links.map(link => (
+      <li key={link[1]}>
+        <NavLink to={link[0]} exact activeClassName='active'>
+          {link[1]}
+        </NavLink>
+      </li>
+    ))
+  )
+}
+const Nav = ({ authedUser, usersName }) => {
     return (
       <nav className='nav'>
         <ul>
-          <li>
-            <NavLink to='/' exact activeClassName='active'>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/add' activeClassName='active'>
-              New Poll
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/leaderboard' activeClassName='active'>
-              Leaderboard
-            </NavLink>
-          </li>
+          {navLinks()}
         </ul>
         <ul className="loginNav">
             {authedUser ?
@@ -38,18 +38,17 @@ class Nav extends Component {
               </li>
             }
             {authedUser &&
-              <li><span>&nbsp;|&nbsp;</span></li>
-            }
-            {authedUser &&
-              <li>
-                <NavLink to='/logout'>Logout</NavLink>
-              </li>
+              <Fragment>
+                <li className="divider"></li>
+                <li>
+                  <NavLink to='/logout'>Logout</NavLink>
+                </li>
+              </Fragment>
             }
         </ul>
 
       </nav>
     )
-  }
 }
 function mapStateToProps ({authedUser, users, polls}) {
   const theUsers = []
