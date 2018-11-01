@@ -6,16 +6,6 @@ import TakePoll from './TakePoll'
 import './css/PollPage.css'
 
 class PollPage extends Component {
-constructor(props) {
-  super(props)
-  const { poll, authedUser } = this.props
-  const userHasTaken = poll.choice1.includes(authedUser) || poll.choice2.includes(authedUser)
-  const userAnswer = userHasTaken ? this.findAuthedUserChoice(poll, authedUser) : ''
-  this.state = {
-    userTaken: userHasTaken,
-    userChosen: userAnswer
-  }
-}
 findAuthedUserChoice (poll, authedUser) {
   if(poll.choice1.includes(authedUser)) {
     return poll.choicesTxt[0]
@@ -39,6 +29,12 @@ render() {
   const totalAnswers = poll.choice1.length + poll.choice2.length
   const percChoice1 = totalAnswers > 0 ? parseInt((poll.choice1.length / totalAnswers) * 100, 10) : 0
   const percChoice2 = 100 - percChoice1
+  const userHasTaken = poll.choice1.includes(authedUser) || poll.choice2.includes(authedUser)
+  const userAnswer = userHasTaken ? this.findAuthedUserChoice(poll, authedUser) : ''
+  this.state = {
+    userTaken: userHasTaken,
+    userChosen: userAnswer
+  }
   if (authedUser === '') {
    return (
      <h1 className="pleaseLogin">
@@ -50,7 +46,7 @@ render() {
         <h1>WOULD YOU RATHER???</h1>
         <Poll id={id} />
           <div className='pollDetails'>
-            {totalAnswers > 0 && 
+            {totalAnswers > 0 &&
               this.state.userTaken &&
             <div>
               <h2 className='pollTotals'>Total Votes So Far: {totalAnswers}</h2>
