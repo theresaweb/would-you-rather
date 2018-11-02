@@ -7,7 +7,7 @@ import './css/Login.css'
 class Login extends Component {
   state = {
     selectedUser: '',
-    toHome: false,
+    toPrev: false,
   }
   handleChange = (event) => {
     this.setState({
@@ -21,13 +21,14 @@ class Login extends Component {
     dispatch(setAuthedUser(selectedUser))
     this.setState({
      selectedUser: '',
-     toHome: id ? false : true,
+     toPrev: id ? false : true,
    })
  }
   render() {
-    const { selectedUser, toHome } = this.state
-    if (toHome === true) {
-      return <Redirect to='/' />
+    const { selectedUser, toPrev } = this.state
+    const { redirectUrl } = this.props.location.state
+    if (toPrev === true) {
+      return <Redirect to={redirectUrl} />
     }
     return (
       <div className="login">

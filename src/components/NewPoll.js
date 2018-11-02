@@ -30,10 +30,8 @@ class NewPoll extends Component {
     const { authedUser } = this.props
     const { choicesTxt, toHome } = this.state
     if (authedUser === '') {
-       return (
-       <h1 className="pleaseLogin">
-         Please <a href="/login">login</a>
-       </h1>
+      return (
+        <Redirect to={{pathname: '/login', state: {redirectUrl: this.props.location.pathname}}} />
       )
     }
     if (toHome === true) {

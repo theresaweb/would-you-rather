@@ -37,11 +37,10 @@ render() {
   const userAnswer = userHasTaken ? this.findAuthedUserChoice(poll, authedUser) : ''
 
   if (authedUser === '') {
-   return (
-     <h1 className="pleaseLogin">
-       Please <a href="/login">login</a>
-     </h1>
-   )}
+    return (
+      <Redirect to={{pathname: '/login', state: {redirectUrl: this.props.location.pathname}}} />
+    )
+   }
     return (
       <div className='pollPage'>
         <h1>WOULD YOU RATHER???</h1>

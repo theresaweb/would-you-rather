@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import './css/Leaderboard.css'
 
 const filterAuther = (polls, id) => polls.filter((poll) => poll.author === id).length
@@ -8,10 +9,8 @@ const filterAnsweredPolls = (polls, id) =>
 
 const Leaderboard = ({ authedUser, users, polls }) => {
     if (authedUser === '') {
-     return (
-     <h1 className="pleaseLogin">
-       Please <a href="/login">login</a>
-     </h1>
+      return (
+        <Redirect to={{pathname: '/login', state: {redirectUrl: this.props.location.pathname}}} />
     )}
     return (
       <div className="leaderboard">

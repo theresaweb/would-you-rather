@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import Poll from './Poll'
 import './css/Homepage.css'
 
@@ -22,34 +23,29 @@ class Homepage extends Component {
     const { authedUser } = this.props
     const { answered } = this.state
     const filteredPolls = this.props.polls.filter(poll => isSameAsAnsweredState(poll.choice1, poll.choice2, authedUser, answered))
-    if(authedUser === '')
-       return (
+    if (authedUser === '') {
+    return (
+      <Redirect to={{pathname: '/login', state: {redirectUrl: this.props.location.pathname}}} />
+    )}
+     return (
+       <div>
          <div className="homepage">
            <h1>WOULD YOU RATHER???</h1>
-           <h2 className="pleaseLogin">
-             Please <a href="/login">login</a>
-           </h2>
+           <div className="answeredToggle">{answered ? "answered" : "unanswered"}</div>
+           <label className="switch">
+             <input type="checkbox" onChange={this.handleChange} />
+             <span className="slider round"></span>
+           </label>
+           <ul className='homepage-list'>
+             {filteredPolls.map(({id}) => (
+               <li key={id}>
+                 <Poll id={id} answered={answered}/>
+               </li>
+             ))}
+           </ul>
          </div>
-       )
-       return (
-         <div>
-           <div className="homepage">
-             <h1>WOULD YOU RATHER???</h1>
-             <div className="answeredToggle">{answered ? "answered" : "unanswered"}</div>
-             <label className="switch">
-               <input type="checkbox" onChange={this.handleChange} />
-               <span className="slider round"></span>
-             </label>
-             <ul className='homepage-list'>
-               {filteredPolls.map(({id}) => (
-                 <li key={id}>
-                   <Poll id={id} answered={answered}/>
-                 </li>
-               ))}
-             </ul>
-           </div>
-         </div>
-       )
+       </div>
+     )
   }
 }
  function mapStateToProps ({ polls, users, authedUser }) {
