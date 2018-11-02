@@ -15,18 +15,18 @@ import './css/App.css'
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData())
+    this.props.getData()
   }
   render() {
+    const { loading } = this.props
     return (
       <Router>
         <Fragment>
           <LoadingBar />
           <div className='container'>
             <Nav />
-            {this.props.loading === true
-              ? null
-              : <div>
+            {loading ? null :
+              <div>
                   <Switch>
                     <Route path='/' exact component={Homepage} />
                     <Route path='/login' component={Login} />
@@ -43,10 +43,14 @@ class App extends Component {
     )
   }
 }
-
+function mapDispatchToProps(dispatch) {
+  return {
+    getData: () => dispatch(handleInitialData())
+  }
+}
 function mapStateToProps ({ authedUser }) {
   return {
     loading: authedUser === null
   }
 }
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
