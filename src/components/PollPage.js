@@ -27,20 +27,19 @@ handleTakenChange(taken, selection) {
 }
 render() {
   const { id, poll, authedUser } = this.props
-  if(poll === undefined) {
-    return <Redirect to='/notfound' />
-  }
-  const totalAnswers = poll.choice1.length + poll.choice2.length
-  const percChoice1 = totalAnswers > 0 ? parseInt((poll.choice1.length / totalAnswers) * 100, 10) : 0
-  const percChoice2 = 100 - percChoice1
-  const userHasTaken = poll.choice1.includes(authedUser) || poll.choice2.includes(authedUser)
-  const userAnswer = userHasTaken ? this.findAuthedUserChoice(poll, authedUser) : ''
-
   if (authedUser === '') {
     return (
       <Redirect to={{pathname: '/login', state: {redirectUrl: this.props.location.pathname}}} />
     )
    }
+   if(poll === undefined) {
+     return <Redirect to='/notfound' />
+   }
+   const totalAnswers = poll.choice1.length + poll.choice2.length
+   const percChoice1 = totalAnswers > 0 ? parseInt((poll.choice1.length / totalAnswers) * 100, 10) : 0
+   const percChoice2 = 100 - percChoice1
+   const userHasTaken = poll.choice1.includes(authedUser) || poll.choice2.includes(authedUser)
+   const userAnswer = userHasTaken ? this.findAuthedUserChoice(poll, authedUser) : ''
     return (
       <div className='pollPage'>
         <h1>WOULD YOU RATHER???</h1>
