@@ -19,10 +19,10 @@ class Login extends Component {
     const { selectedUser } = this.state
     const { dispatch, id } = this.props
     dispatch(setAuthedUser(selectedUser))
-    this.setState(() => ({
+    this.setState({
      selectedUser: '',
      toHome: id ? false : true,
-   }))
+   })
  }
   render() {
     const { selectedUser, toHome } = this.state

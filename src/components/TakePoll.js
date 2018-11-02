@@ -45,7 +45,7 @@ class TakePoll extends Component {
                 disabled={this.state.selected}>
                   Submit
               </button>
-            
+
         </form>
       </div>
     )

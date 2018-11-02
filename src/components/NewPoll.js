@@ -12,19 +12,19 @@ class NewPoll extends Component {
   handleChange = (e, index) => {
     const choicesTxt = this.state.choicesTxt.slice()
     choicesTxt[index] = e.target.value
-     this.setState(() => ({
+     this.setState({
       choicesTxt
-    }))
+    })
   }
   handleSubmit = (e) => {
     e.preventDefault()
      const { choicesTxt } = this.state
      const { dispatch, id } = this.props
      dispatch(handleAddPoll(choicesTxt))
-     this.setState(() => ({
+     this.setState({
       choicesTxt: [],
       toHome: id ? false : true,
-    }))
+    })
   }
   render() {
     const { authedUser } = this.props
