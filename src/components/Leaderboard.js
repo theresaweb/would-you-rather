@@ -7,10 +7,10 @@ const filterAuther = (polls, id) => polls.filter((poll) => poll.author === id).l
 const filterAnsweredPolls = (polls, id) =>
   polls.filter((poll) => poll.choice1.includes(id) || poll.choice2.includes(id)).length
 
-const Leaderboard = ({ authedUser, users, polls }) => {
+const Leaderboard = ({ authedUser, users, polls, location }) => {
     if (authedUser === '') {
       return (
-        <Redirect to={{pathname: '/login', state: {redirectUrl: this.props.location.pathname}}} />
+        <Redirect to={{pathname: '/login', state: {redirectUrl: location.pathname}}} />
     )}
     return (
       <div className="leaderboard">
@@ -31,7 +31,7 @@ const Leaderboard = ({ authedUser, users, polls }) => {
       </div>
     )
 }
-function mapStateToProps ({ polls, users, authedUser }) {
+function mapStateToProps ({ polls, users, authedUser }, props) {
   const thePolls = []
   Object.entries(polls).forEach(([key, value]) => {
     thePolls.push(value)
@@ -55,6 +55,7 @@ function mapStateToProps ({ polls, users, authedUser }) {
    authedUser,
    polls: thePolls,
    users: theUsers,
+   location: props.location
  }
 }
 export default connect(mapStateToProps)(Leaderboard)
