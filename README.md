@@ -73,38 +73,38 @@ Theresa Newman / Would You Rather app / React / Redux / Udacity React Nanodegree
 * Are the details of each poll displayed with all of the relevant information?
 * The details of the poll are available at questions/:question_id.
 * When a poll is clicked on the home page, the following is shown:
-** the text “Would You Rather”;
-** the picture of the user who posted the polling question; and the two options.
+  * the text “Would You Rather”;
+  * the picture of the user who posted the polling question; and the two options.
 * For answered polls, each of the two options contains the following:
 the text of the option;
-** the number of people who voted for that option;
-** the percentage of people who voted for that option.
+  * the number of people who voted for that option;
+  * the percentage of people who voted for that option.
 * The option selected by the logged in user should be clearly marked.
 * When the user is logged in, the details of the poll are shown. If the user is logged out, he/she is asked to log in before before being able to access the poll.
 * The application asks the user to sign in and shows a 404 page if that poll does not exist. (In other words, if a user creates a poll and then the same or another user tries to access that poll by its url, the user should be asked to sign in and then be shown a 404 page. Please keep in mind that new polls will not be accessible at their url because of the way the backend is set up in this application.)
 * Does the voting mechanism work correctly?
-** Upon voting in a poll, all of the information of the answered poll is displayed.
-** The user’s response is recorded and is clearly visible on the poll details page.
-** When the user comes back to the home page, the polling question appears in the “Answered” column.
-** The voting mechanism works correctly, and the data on the leaderboard changes appropriately.
+  * Upon voting in a poll, all of the information of the answered poll is displayed.
+  * The user’s response is recorded and is clearly visible on the poll details page.
+  * When the user comes back to the home page, the polling question appears in the “Answered” column.
+  * The voting mechanism works correctly, and the data on the leaderboard changes appropriately.
 * Can users add new polls?
-** The form is available at/add.
-** The application shows the text “Would You Rather” and has a form for creating two options.
-** Upon submitting the form, a new poll is created and the user is taken to the home page.
-** The new polling question appears in the correct category on the home page.
+  * The form is available at/add.
+  * The application shows the text “Would You Rather” and has a form for creating two options.
+  * Upon submitting the form, a new poll is created and the user is taken to the home page.
+  * The new polling question appears in the correct category on the home page.
 * Does the leaderboard work correctly and have the desired functionality?
-** The Leaderboard is available at/leaderboard.
-** Each entry on the leaderboard contains the following:
-*** the user’s name;
-*** the user’s picture;
-*** the number of questions the user asked; and
-*** the number of questions the user answered.
-** Users are ordered in descending order based on the sum of the number of questions they’ve answered and the number of questions they’ve asked.
+  * The Leaderboard is available at/leaderboard.
+  * Each entry on the leaderboard contains the following:
+   * the user’s name;
+   * the user’s picture;
+   * the number of questions the user asked; and
+   * the number of questions the user answered.
+  * Users are ordered in descending order based on the sum of the number of questions they’ve answered and the number of questions they’ve asked.
 * Is the application navigable?
-** The app contains a navigation bar that is visible on all of the pages.
-** The user can navigate between the page for creating new polls, and the leaderboard page, and the home page without typing the address into the address bar.
-** Does the application interact with the backend correctly?
-** The data that’s initially displayed is populated correctly from the backend.
+  * The app contains a navigation bar that is visible on all of the pages.
+  * The user can navigate between the page for creating new polls, and the leaderboard page, and the home page without typing the address into the address bar.
+  * Does the application interact with the backend correctly?
+  * The data that’s initially displayed is populated correctly from the backend.
 * Each user’s answer and each new poll is correctly recorded on the backend.
 * Does the code run without errors? Is the code free of warnings that resulted from not following the best practices listed in the documentation, such as using key for list items? Is the code formatted properly?
 *The code runs without errors. There are no warnings that resulted from not following the best practices listed in the documentation, such as using key for list items. All code is functional and formatted properly.
